@@ -1,0 +1,5 @@
+// Plugins are applied from root build.gradle
+dependencies {
+    // Project-specific dependencies can be added here if needed
+}
+

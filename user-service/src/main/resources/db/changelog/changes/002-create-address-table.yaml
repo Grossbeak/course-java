@@ -1,0 +1,44 @@
+databaseChangeLog:
+  - changeSet:
+      id: 002-create-address-table
+      author: system
+      changes:
+        - createTable:
+            tableName: addresses
+            columns:
+              - column:
+                  name: id
+                  type: BIGSERIAL
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: user_id
+                  type: BIGINT
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_address_user
+                    references: users(id)
+                    deleteCascade: true
+              - column:
+                  name: street
+                  type: VARCHAR(255)
+              - column:
+                  name: city
+                  type: VARCHAR(255)
+              - column:
+                  name: zip_code
+                  type: VARCHAR(50)
+              - column:
+                  name: created_at
+                  type: TIMESTAMP
+                  defaultValueComputed: CURRENT_TIMESTAMP
+        - createIndex:
+            indexName: idx_address_user_id
+            tableName: addresses
+            columns:
+              - column:
+                  name: user_id
+
+
+

@@ -1,0 +1,51 @@
+databaseChangeLog:
+  - changeSet:
+      id: 002-create-dish-table
+      author: system
+      changes:
+        - createTable:
+            tableName: dishes
+            columns:
+              - column:
+                  name: id
+                  type: BIGSERIAL
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: restaurant_id
+                  type: BIGINT
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_dish_restaurant
+                    references: restaurants(id)
+                    deleteCascade: true
+              - column:
+                  name: name
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: description
+                  type: TEXT
+              - column:
+                  name: price
+                  type: DECIMAL(10, 2)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: image_url
+                  type: VARCHAR(500)
+              - column:
+                  name: created_at
+                  type: TIMESTAMP
+                  defaultValueComputed: CURRENT_TIMESTAMP
+        - createIndex:
+            indexName: idx_dish_restaurant_id
+            tableName: dishes
+            columns:
+              - column:
+                  name: restaurant_id
+
+
+
